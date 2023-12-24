@@ -4,6 +4,13 @@ import (
 	"fmt"
 )
 
+// Goals
+// 1) Validate user input
+//   => Show error message & exit if invalid input is provided
+//   - No negative numbers
+//   - Not 0
+// 2) Store calculated results into file.
+
 func main() {
 
 	revenue := getUserInput("Revenue: ")
