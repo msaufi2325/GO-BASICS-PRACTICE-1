@@ -7,14 +7,10 @@ import (
 func main() {
 
 	revenue := getUserInput("Revenue: ")
-	expenses := getUserInput("Epenses: ")
+	expenses := getUserInput("Expenses: ")
 	taxRate := getUserInput("Tax rate in %: ")
 
 	earningBeforeTax, earningAfterTax, ratio := calculateEarnings(revenue, expenses, taxRate)
-
-	fmt.Println("Earning before tax: ", earningBeforeTax)
-	fmt.Println("Profit: ", earningAfterTax)
-	fmt.Println("Ratio: ", ratio)
 
 	formattedEarningBeforeTax := fmt.Sprintf("Earning before tax: %0.1f\n", earningBeforeTax)
 	formattedProfit := fmt.Sprintf("Profit: %0.1f\n", earningAfterTax)
