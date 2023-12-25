@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -13,9 +14,15 @@ import (
 
 func main() {
 
-	revenue := getUserInput("Revenue: ")
-	expenses := getUserInput("Expenses: ")
-	taxRate := getUserInput("Tax rate in %: ")
+	revenue, err := getUserInput("Revenue: ")
+	expenses, err := getUserInput("Expenses: ")
+	taxRate, err := getUserInput("Tax rate in %: ")
+
+	if err != nil {
+		fmt.Println("ERROR!")
+		fmt.Println(err)
+		fmt.Println("---------------------------------")
+	}
 
 	earningBeforeTax, earningAfterTax, ratio := calculateEarnings(revenue, expenses, taxRate)
 
@@ -26,12 +33,15 @@ func main() {
 	fmt.Print(formattedEarningBeforeTax, formattedProfit, formattedRatio)
 }
 
-func getUserInput(infoText string) float64 {
+func getUserInput(infoText string) (float64, error) {
 	var userInput float64
 	fmt.Print(infoText)
 	fmt.Scan(&userInput)
+	if userInput <= 0 {
+		return 0, errors.New("invalid amount must be greater than 0")
+	}
 
-	return userInput
+	return userInput, nil
 }
 
 func calculateEarnings(revenue, expenses, taxRate float64) (earningBeforeTax float64, earningAfterTax float64, ratio float64) {
